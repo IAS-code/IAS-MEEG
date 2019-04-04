@@ -1,0 +1,12 @@
+.. _api_documentation:
+
+=================
+API Documentation
+=================
+
+Functions:
+
+.. currentmodule:: IAS
+
+.. autofunction:: SetParameters
+
