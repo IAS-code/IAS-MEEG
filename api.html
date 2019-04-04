@@ -28,8 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="README" href="includeme.html" />
-    <link rel="prev" title="Welcome to IAS’s documentation!" href="index.html" /> 
+    <link rel="prev" title="IAS Demo" href="example.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -79,8 +78,8 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">IAS Demo</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="includeme.html">README</a></li>
 </ul>
 
             
@@ -149,6 +148,74 @@
 <span id="id1"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Functions:</p>
 <dl class="function">
+<dt id="IAS.IAS_algorithm">
+<code class="descclassname">IAS.</code><code class="descname">IAS_algorithm</code><span class="sig-paren">(</span><em>LF</em>, <em>LF_scaling</em>, <em>APChol</em>, <em>B</em>, <em>B_scaling</em>, <em>sigma</em>, <em>theta_star</em>, <em>eta</em>, <em>n_outer</em>, <em>maxit</em>, <em>theta_tol</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.IAS_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function solves the MEG inverse problem by the Iterative Alternating Sequential (IAS) algorithm. 
+The IAS algorithm is based on an iterative scheme that alternatively updates the dipole
+moments Q by solving a linear least squares problem using a priorconditioned CGLS algorithm with sutable 
+stopping condition and updating the hyperparameter theta by an explicit formula.</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><p class="first">LF: (M,3*N) array, the lead field matrix where M is the number of channels and N is the number of dipoles</p>
+<p>LF_scaling: scalar to be used to scale the lead field (output of the function SetParameters)</p>
+<p>APChol: (3*N,3*N) array, the Cholesky factor of the anatomical prior covariance matrix</p>
+<p>B: (M,T) array, a set of data of length T</p>
+<p>B_scaling: scalar, to be used for scaling the data (output of the function SetParameters)</p>
+<p>sigma: scalar, standard deviation of the scaled noise (output of the function SetParameters)</p>
+<p>theta_star: N-vector, computed theta_star values (output of the function SetParameters)</p>
+<p>eta: scalar, parameter for selecting the focality of the reconstructed activity (default value: 0.01; choose 0.001 for focal sources)</p>
+<p>n_outer: scalar, maximum number of iterations of the outer loop (default value: 30)</p>
+<p>maxit: scalar, maximum number of iterations of the inner loop (default value: 120)</p>
+<p class="last">theta_tol: scalar, limit of the relative change of theta in the outer loop (default value: 0.001)</p>
+</dd>
+<dt>Output:</dt>
+<dd>Q: (3*N,T) array, reconstructed dipole moments</dd>
+<dt>Usage:</dt>
+<dd><p class="first">Q=IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)</p>
+<p>IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,0.01,30,120,0.001)</p>
+<p>IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,30,120,0.001)</p>
+<p class="last">IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,0.001)</p>
+</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><p>References:</p>
+<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
+A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
+Inverse Problems, 31 (12) (2015) 12500</p>
+<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
+Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
+with automatic depth weighting: sensitivity and specificity analysis
+arXiv:1707.05639 (2017)</p>
+</div></blockquote>
+<blockquote>
+<div>Version: July, 2017</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="IAS.BuildAnatomicalPrior">
+<code class="descclassname">IAS.</code><code class="descname">BuildAnatomicalPrior</code><span class="sig-paren">(</span><em>coord</em>, <em>normals</em>, <em>tiny</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.BuildAnatomicalPrior" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates the anatomical prior that favors dipoles in the preferred direction.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Input:</dt>
+<dd><p class="first">coord: (3,N) array, coordinates of the dipoles in the grid</p>
+<p>normals: (3,N) array, normal vectors of the dipoles in the grid</p>
+<p class="last">tiny: scalar, relative variance of the components of the dipoles orthogonal to the preferred direction (default value: 0.05)</p>
+</dd>
+<dt>Output:</dt>
+<dd>APChol: (3*N,3*N) array, the Cholesky factor of the anatomical prior covariance</dd>
+<dt>Usage: </dt>
+<dd>APChol = BuildAnatomicalPrior(coord,normals,tiny)
+BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,normals,0.05)</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div>Note: This program should be vectorized for speed-up</div></blockquote>
+</dd></dl>
+
+<dl class="function">
 <dt id="IAS.SetParameters">
 <code class="descclassname">IAS.</code><code class="descname">SetParameters</code><span class="sig-paren">(</span><em>LF</em>, <em>B</em>, <em>SNR</em>, <em>cut_off</em>, <em>is_paint</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SetParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function scales the lead field and the data, adjusts the truncation of the sensitivities, and returns an estimate for the standard deviation of the noise</p>
@@ -200,10 +267,8 @@ arXiv:1707.05639 (2017)</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="includeme.html" class="btn btn-neutral float-right" title="README" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="index.html" class="btn btn-neutral" title="Welcome to IAS’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral" title="IAS Demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

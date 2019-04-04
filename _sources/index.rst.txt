@@ -10,12 +10,26 @@ The Iterative Alternating Sequential (IAS) algorithm is based on an iterative sc
 moments Q by solving a linear least squares problem using a priorconditioned CGLS algorithm with sutable 
 stopping condition and updating the hyperparameter theta by an explicit formula.
    
+
+References
+----------
+
+* D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
+  A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
+  Inverse Problems, 31 (12) (2015) 12500
+ 
+* D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
+  Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
+  with automatic depth weighting: sensitivity and specificity analysis
+  arXiv:1707.05639 (2017)
+
    
 .. toctree::
    :maxdepth: 1
 
+   example
    api
-   includeme
+   
 
 
 
