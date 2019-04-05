@@ -1,21 +1,6 @@
-function [id_a, id_c, id_s] = SlicedVisualization_ActivityMap_Gif(coord,Q)
+function [id_a, id_c, id_s] = SlicedVisualization_ActivityMap_Gif(coord, Q)
 %
 % This is a development program for visualizing the activity map
-%
-%---------------------------------------------------------------
-% References:
-%
-% D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-% A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
-% Inverse Problems, 31 (12) (2015) 12500
-% 
-% D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-% Brain Activity Mapping from MEG Data via a Hierarchical Bayesian Algorithm with Automatic Depth Weighting,
-% Brain topography, 1-31, (2018) 
-% 
-%----------------------------------------------------------------
-% Version: November, 2018
-%----------------------------------------------------------------
 
 %% Classifying the dipoles in five categories according to their strength 
 % The color scale is piecewise linear in logarithmic scale
