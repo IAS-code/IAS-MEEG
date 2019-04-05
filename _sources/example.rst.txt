@@ -28,7 +28,6 @@ after discretization comprises 19054 vertices.
 
    <a href="https://www.dropbox.com/s/fe00ojza0osq3s9/IAS_data.tar.gz?dl=1" target="_blank">here</a>
    
-
 .. [Ref] A. Gramfort et al, MNE software for processing MEG and EEG data, Neuroimage 86 (2014) 446-460
 
 .. code-block:: matlab
@@ -86,6 +85,11 @@ after discretization comprises 19054 vertices.
     SlicedVisualization_ActivityMap_Gif(coord,Q_est);
 
 
+.. figure::  img/activity_92ms.png
+   :align:   center
+
+   Reconstructed activity map from real data at 92 ms
+   
 **Download** IAS Demo script: :download:`IAS_Demo.m <IAS_Demo.m>`
 
 
