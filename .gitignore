@@ -1,0 +1,6 @@
+*.pyc
+*.mat
+*.bak
+*~
+*.egg-info/*
+*old/*
