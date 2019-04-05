@@ -154,11 +154,23 @@ MRI reconstructions created with FreeSurfer, in the <a href="http://martinos.org
 <p>As part of the protocol for the data collection, checkerboard patterns were presented into the left
 and right visual field, interspersed by tones to the left or right ear. The interval between the stimuli
 was 750 ms. Occasionally a smiley face was presented at the center of the visual field. The subject
-was asked to press a key with the right index finger as soon as possible after the appearance of the face
-[A. Gramfort et al, MNE software for processing MEG and EEG data, Neuroimage 86 (2014) 446-460].
+was asked to press a key with the right index finger as soon as possible after the appearance of the fac.e <a class="reference internal" href="#ref" id="id1">[Ref]</a>
 Here we only consider the trials corresponding to the left visual stimulus and perform the averaging on these trials.
 The source space containing both cortical regions and subcortical structures
-after discretization comprises 22019 vertices.</p>
+after discretization comprises 19054 vertices.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a href="https://www.dropbox.com/s/fe00ojza0osq3s9/IAS_data.tar.gz?dl=1" target="_blank">here</a> to download the data for IAS demo.</p>
+</div>
+<table class="docutils citation" frame="void" id="ref" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Ref]</a></td><td><ol class="first last upperalpha simple">
+<li>Gramfort et al, MNE software for processing MEG and EEG data, Neuroimage 86 (2014) 446-460</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Reset all</span>
 <span class="n">clear</span><span class="p">;</span> <span class="n">clc</span><span class="p">;</span>
 <span class="n">close</span> <span class="n">all</span>
@@ -167,17 +179,17 @@ after discretization comprises 22019 vertices.</p>
 <span class="c">%     SNR: estimated signal-to-noise ratio</span>
 <span class="n">SNR</span> <span class="p">=</span> <span class="mi">25</span><span class="p">;</span>
 <span class="c">%     eta: scalar, parameter for selecting the focality of the reconstructed activity</span>
-<span class="n">eta</span> <span class="p">=</span> <span class="mf">0.001</span><span class="p">;</span>
+<span class="n">eta</span> <span class="p">=</span> <span class="mf">0.01</span><span class="p">;</span>
 
 <span class="c">%% Loading the source space</span>
 <span class="c">%     coord, normals: (3,N) array, coordinates and normal vectors of the dipoles in the grid</span>
 <span class="nb">disp</span><span class="p">(</span><span class="s">&#39;Loading source space&#39;</span><span class="p">)</span>
-<span class="n">load</span><span class="p">(</span><span class="s">&#39;SourceSpace&#39;</span><span class="p">)</span>
+<span class="n">load</span><span class="p">(</span><span class="s">&#39;SourceSpace_DBA&#39;</span><span class="p">)</span>
 
 <span class="c">%% Loading the leadfield matrix</span>
 <span class="c">%     LF: (M,3*N) array, the lead field matrix (M is the number of channels; N is the number of dipoles)</span>
 <span class="nb">disp</span><span class="p">(</span><span class="s">&#39;Loading leadfield matrix&#39;</span><span class="p">)</span>
-<span class="n">load</span><span class="p">(</span><span class="s">&#39;LeadfieldMatrix&#39;</span><span class="p">)</span>
+<span class="n">load</span><span class="p">(</span><span class="s">&#39;LeadfieldMatrix_DBA&#39;</span><span class="p">)</span>
 
 <span class="c">%% Loading the magnetic data</span>
 <span class="c">%     data: (M,T) array, a set of data of length T</span>
@@ -192,9 +204,9 @@ after discretization comprises 22019 vertices.</p>
 
 <span class="c">%% Setting theta_star and scaling</span>
 <span class="nb">disp</span><span class="p">(</span><span class="s">&#39;Setting parameters&#39;</span><span class="p">)</span>
-<span class="n">t_peak</span> <span class="p">=</span> <span class="mi">173</span><span class="p">;</span>
-<span class="n">t_min</span> <span class="p">=</span> <span class="mi">160</span><span class="p">;</span>
-<span class="n">t_max</span> <span class="p">=</span> <span class="mi">250</span><span class="p">;</span>
+<span class="n">t_peak</span> <span class="p">=</span> <span class="mi">86</span><span class="p">;</span>
+<span class="n">t_min</span> <span class="p">=</span> <span class="mi">70</span><span class="p">;</span>
+<span class="n">t_max</span> <span class="p">=</span> <span class="mi">160</span><span class="p">;</span>
 <span class="n">B</span> <span class="p">=</span> <span class="n">data</span><span class="p">(:,</span><span class="n">t_min</span><span class="p">:</span><span class="n">t_max</span><span class="p">);</span>   <span class="c">% a clip of the data</span>
 <span class="p">[</span><span class="n">theta_star</span><span class="p">,</span><span class="n">theta_cut_off</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">LF_scaling</span><span class="p">,</span><span class="n">B_scaling</span><span class="p">]</span> <span class="p">=</span> <span class="n">SetParameters</span><span class="p">(</span><span class="n">LF</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">SNR</span><span class="p">);</span>
 
@@ -205,7 +217,7 @@ after discretization comprises 22019 vertices.</p>
 <span class="c">%% Visualizing the activity map</span>
 <span class="nb">disp</span><span class="p">([</span><span class="s">&#39;Visualizing activity map at time &#39;</span><span class="p">,</span><span class="n">num2str</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="n">t_peak</span><span class="p">)),</span><span class="s">&#39; ms&#39;</span><span class="p">])</span>
 <span class="n">N</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">LF</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">;</span>  <span class="c">% number of dipoles in the source space</span>
-<span class="n">t_vis</span> <span class="p">=</span> <span class="n">t_peak</span><span class="p">;</span>
+<span class="n">t_vis</span> <span class="p">=</span> <span class="n">t_peak</span> <span class="o">-</span> <span class="n">t_min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">q</span> <span class="p">=</span> <span class="n">Q</span><span class="p">(:,</span> <span class="n">t_vis</span><span class="p">);</span>
 <span class="n">dip_norm2</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="nb">reshape</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">Q_est</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">dip_norm2</span><span class="p">);</span>

@@ -11,5 +11,6 @@ Functions:
 .. autofunction:: IAS_algorithm
 .. autofunction:: BuildAnatomicalPrior
 .. autofunction:: SetParameters
+.. autofunction:: SlicedVisualization_ActivityMap_Gif
 
 

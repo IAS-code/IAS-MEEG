@@ -185,9 +185,8 @@ stopping condition and updating the hyperparameter theta by an explicit formula.
 A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
 Inverse Problems, 31 (12) (2015) 12500</p>
 <p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
-with automatic depth weighting: sensitivity and specificity analysis
-arXiv:1707.05639 (2017)</p>
+Brain Activity Mapping from MEG Data via a Hierarchical Bayesian Algorithm with Automatic Depth Weighting,
+Brain topography, 1-31, (2018)</p>
 </div></blockquote>
 <blockquote>
 <div>Version: July, 2017</div></blockquote>
@@ -219,8 +218,7 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 <dt id="IAS.SetParameters">
 <code class="descclassname">IAS.</code><code class="descname">SetParameters</code><span class="sig-paren">(</span><em>LF</em>, <em>B</em>, <em>SNR</em>, <em>cut_off</em>, <em>is_paint</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SetParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function scales the lead field and the data, adjusts the truncation of the sensitivities, and returns an estimate for the standard deviation of the noise</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt>Input:</dt>
 <dd><p class="first">LF: (m,3*n) array, the lead field matrix where m is the number of channels and n is the number of dipoles</p>
 <p>B: (m,T) array, a clip of the data of length T</p>
@@ -244,17 +242,12 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 </dl>
 </dd>
 </dl>
-</div></blockquote>
-<blockquote>
-<div><p>References:</p>
-<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
-Inverse Problems, 31 (12) (2015) 12500</p>
-<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
-with automatic depth weighting: sensitivity and specificity analysis
-arXiv:1707.05639 (2017)</p>
-</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="IAS.SlicedVisualization_ActivityMap_Gif">
+<code class="descclassname">IAS.</code><code class="descname">SlicedVisualization_ActivityMap_Gif</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SlicedVisualization_ActivityMap_Gif" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a development program for visualizing the activity map</p>
 </dd></dl>
 
 </div>
