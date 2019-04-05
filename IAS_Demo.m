@@ -22,9 +22,8 @@
 % Inverse Problems, 31 (12) (2015) 12500
 % 
 % D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-% Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
-% with automatic depth weighting: sensitivity and specificity analysis
-% arXiv:1707.05639 (2017)
+% Brain Activity Mapping from MEG Data via a Hierarchical Bayesian Algorithm with Automatic Depth Weighting,
+% Brain topography, 1-31, (2018) 
 %----------------------------------------------------------------
 % Version: July, 2017
 %----------------------------------------------------------------

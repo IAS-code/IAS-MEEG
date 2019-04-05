@@ -28,18 +28,6 @@ function [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(L
 %        SetParameters(LF,B,SNR) is equivalent to SetParameters(LF,B,SNR,0.9,0)
 %
 %        SetParameters(LF,B,SNR,cut_off) is equivalent to SetParameters(LF,B,SNR,cut_off,0)
-%----------------------------------------------------------------
-% References:
-%
-% D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-% A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
-% Inverse Problems, 31 (12) (2015) 12500
-% 
-% D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-% Brain activity mapping from MEG data via a hierarchical Bayesian algorithm 
-% with automatic depth weighting: sensitivity and specificity analysis
-% arXiv:1707.05639 (2017)
-%----------------------------------------------------------------
 
 % Setting default values
 if nargin == 3, cut_off = 0.9; is_paint = 0; end
