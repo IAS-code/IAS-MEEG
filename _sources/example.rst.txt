@@ -85,7 +85,7 @@ after discretization comprises 19054 vertices.
     SlicedVisualization_ActivityMap_Gif(coord,Q_est);
 
 
-.. figure::  img/activity_92ms.png
+.. figure::  img/activity_92ms.jpg
    :align:   center
 
    Reconstructed activity map from real data at 92 ms
