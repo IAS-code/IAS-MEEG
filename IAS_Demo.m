@@ -9,10 +9,10 @@
 % was 750 ms. Occasionally a smiley face was presented at the center of the visual field. The subject 
 % was asked to press a key with the right index finger as soon as possible after the appearance of the face 
 % [A. Gramfort et al, MNE software for processing MEG and EEG data, Neuroimage 86 (2014) 446-460].
-% In the test we only consider the trials corresponding to the left-ear auditory stimulus 
+% In the test we only consider the trials corresponding to the left visual stimulus 
 % and perform the averaging on these trials. 
 % The source space containing both cortical regions and subcortical structures
-% after discretization comprises 22019 vertices.
+% after discretization comprises 19054 vertices.
 %
 %---------------------------------------------------------------
 % References:
@@ -37,17 +37,17 @@ close all
 %     SNR: estimated signal-to-noise ratio
 SNR = 25;
 %     eta: scalar, parameter for selecting the focality of the reconstructed activity
-eta = 0.001;
+eta = 0.01;
 
 %% Loading the source space
 %     coord, normals: (3,N) array, coordinates and normal vectors of the dipoles in the grid
 disp('Loading source space')
-load('SourceSpace')
+load('SourceSpace_DBA')
 
 %% Loading the leadfield matrix
 %     LF: (M,3*N) array, the lead field matrix (M is the number of channels; N is the number of dipoles)
 disp('Loading leadfield matrix')
-load('LeadfieldMatrix')
+load('LeadfieldMatrix_DBA')
 
 %% Loading the magnetic data
 %     data: (M,T) array, a set of data of length T
@@ -61,20 +61,20 @@ APChol = BuildAnatomicalPrior(coord,normals);
 
 %% Setting theta_star and scaling 
 disp('Setting parameters')
-t_peak = 173;   
-t_min = 160;
-t_max = 250;
+t_peak = 86;   
+t_min = 70;
+t_max = 160;
 B = data(:,t_min:t_max);   % a clip of the data 
 [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,B,SNR);
 
 %% Solving the inverse problem using IAS algorithm
 disp(['Running IAS algorithm from time ',num2str(time(t_min)),' ms to time ',num2str(time(t_max)),' ms'])
-Q = IAS_algorithm(LF, LF_scaling, APChol, data, B_scaling, sigma, theta_star, eta);
+Q = IAS_algorithm(LF, LF_scaling, APChol, B, B_scaling, sigma, theta_star, eta);
 
 %% Visualizing the activity map
 disp(['Visualizing activity map at time ',num2str(time(t_peak)),' ms'])
 N = size(LF,2)/3;  % number of dipoles in the source space
-t_vis = t_peak;
+t_vis = t_peak - t_min +1;
 q = Q(:, t_vis);
 dip_norm2 = sum(reshape(q,3,N).^2,1);
 Q_est = sqrt(dip_norm2);
