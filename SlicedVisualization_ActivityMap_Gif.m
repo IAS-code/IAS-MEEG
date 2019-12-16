@@ -1,6 +1,15 @@
 function [id_a, id_c, id_s] = SlicedVisualization_ActivityMap_Gif(coord, Q)
 %
 % This is a development program for visualizing the activity map
+%
+% Input:
+%      coord: (3,N) array, coordinates of the dipoles in the grid
+%
+%      Q: (3*N, 1) vector, reconstructed dipole moments at a specified time point
+%      
+% Usage:
+%      SlicedVisualization_ActivityMap_Gif(coord, Q_est);
+
 
 %% Classifying the dipoles in five categories according to their strength 
 % The color scale is piecewise linear in logarithmic scale

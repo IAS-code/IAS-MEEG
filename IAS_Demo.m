@@ -78,3 +78,11 @@ q = Q(:, t_vis);
 dip_norm2 = sum(reshape(q,3,N).^2,1);
 Q_est = sqrt(dip_norm2);
 SlicedVisualization_ActivityMap_Gif(coord,Q_est);
+
+
+%%
+[Q_max,i_max] = max(Q_est);
+r0 = coord(:,i_max);
+SingleSliceVisualization(coord,Q_est,r0,'CoordSystem','Brainstorm','ColorScale','double','Locator','pinhead');
+
+
