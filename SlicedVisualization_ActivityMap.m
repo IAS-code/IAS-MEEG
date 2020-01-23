@@ -1,4 +1,4 @@
-function [id_a, id_c, id_s] = SlicedVisualization_ActivityMap_Gif(coord, Q)
+function [id_a, id_c, id_s] = SlicedVisualization_ActivityMap(coord, Q)
 %
 % This is a development program for visualizing the activity map
 %

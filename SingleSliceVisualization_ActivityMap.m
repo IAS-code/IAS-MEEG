@@ -1,42 +1,42 @@
-function curr_fig = SingleSliceVisualization(varargin)
+function curr_fig = SingleSliceVisualization_ActivityMap(varargin)
 
 % Visualization of the activity over slices around a fixed location
 % The visualization shows three views: Axial, coronal, and sagittal views
 % across the brain. An schematic insert helping to visualize the the cut 
 % lines are included.
 %
-% Call:  SingleSliceVisualization(coord,Q,r0) 
-%
-% Optional inputs: The call can be augmented by several properties and the
-% corresponding values,
-%
-% SingleSliceVisualization(coord,Q,Y,r0,Property1,value1,Property2,value2,..)
-%
-% The possible properties and their values are given below.
-%
-% Input: coord - (3,Ncoord) array, source space indicating the dipole 
-%                locations
-%        Q     - (1,ncoord) vector of non-negative entries, the dipole
-%                amplitudes 
-%        r0    - (3,1) array, Cartesian coordinates of the cut planes
-%
-% Optional inputs: 
-%
-% Property: 'Locator'. 
-% Values: 'haircross'(default),'circle','pinhead','none'
-% This property defines how the point r0 is marked in the plots
-%
-% Property: 'Thickness'
-% Values: Real between 0 and 1. Default value 0.1
-% Specifies the thichness of the slice represented in the plot
-%
-% Property: 'CoordSystem'
-% Values: 'MNI' (default) or 'Brainstorm'
-% MNI:        x (right), y (front), z (crown)
-% Brainstorm: x (front), y (left), z (crown)
-%
-% The program returns the figure handle.
+% Input:
+%     coord: (3,Ncoord) array, source space indicating the dipole locations
+%                
+%     Q: (1,ncoord) vector of non-negative entries, the dipole amplitudes 
+%                
+%     r0: (3,1) array, Cartesian coordinates of the cut planes
 % 
+% 
+% Optional input: 
+%   **Property**: 'Locator'. 
+%   **Values**: 'haircross'(default),'circle','pinhead','none'
+%     This property defines how the point r0 is marked in the plots
+%
+%   **Property**: 'Thickness'
+%   **Values**: Real between 0 and 1. Default value 0.1
+%     Specifies the thichness of the slice represented in the plot
+%
+%   **Property**: 'CoordSystem'
+%   **Values**: 'MNI' (default) or 'Brainstorm'
+%   *MNI*:        x (right), y (front), z (crown)
+%   *Brainstorm*: x (front), y (left), z (crown)
+% 
+%
+%  Output:
+%     curr_fig: the figure handle
+% 
+% 
+%  Usage:
+%     SingleSliceVisualization(coord,Q,r0) 
+%     SingleSliceVisualization(coord,Q,Y,r0,Property1,value1,Property2,value2,..)
+%
+
 %--------------------------------------------------------------------------
 % CALLS TO: None
 % Last updated: 7/22/2019

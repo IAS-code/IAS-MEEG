@@ -80,7 +80,7 @@ Q_est = sqrt(dip_norm2);
 SlicedVisualization_ActivityMap(coord,Q_est);
 
 
-%%
+%% Visualazing the activity map and its maximum
 [Q_max,i_max] = max(Q_est);
 r0 = coord(:,i_max);
 SingleSliceVisualization_ActivityMap(coord,Q_est,r0,'CoordSystem','Brainstorm','ColorScale','double','Locator','pinhead');
