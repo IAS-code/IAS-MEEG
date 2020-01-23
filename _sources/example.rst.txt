@@ -91,7 +91,7 @@ after discretization comprises 19054 vertices.
 
 
 
-.. figure::  img/activity_92ms.jpg
+.. figure::  img/SingleSliceVisualization.jpg
    :align:   center
 
    Reconstructed activity map from real data at 92 ms
