@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-IAS
-===
+IAS algorithm
+=============
 
 The Iterative Alternating Sequential (IAS) [Ref1]_ [Ref2]_ algorithm is based on an iterative scheme that alternatively updates the dipole
 moments Q by solving a linear least squares problem using a priorconditioned CGLS algorithm with sutable 
@@ -19,8 +19,8 @@ Download
 
 .. code-block:: bash
 
-    git clone https://github.com/IAS-code/IAS.git
-
+    git clone https://github.com/IAS-code/IAS.git    
+    
 
 .. [Ref1] D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
           *A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning*, Inverse Problems, 31 (12), 125005, (2015)

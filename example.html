@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API Documentation" href="api.html" />
-    <link rel="prev" title="IAS" href="index.html" /> 
+    <link rel="prev" title="IAS algorithm" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -221,14 +221,19 @@ after discretization comprises 19054 vertices.</p>
 <span class="n">q</span> <span class="p">=</span> <span class="n">Q</span><span class="p">(:,</span> <span class="n">t_vis</span><span class="p">);</span>
 <span class="n">dip_norm2</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="nb">reshape</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">Q_est</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">dip_norm2</span><span class="p">);</span>
-<span class="n">SlicedVisualization_ActivityMap_Gif</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span><span class="n">Q_est</span><span class="p">);</span>
+<span class="n">SlicedVisualization_ActivityMap</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span><span class="n">Q_est</span><span class="p">);</span>
+
+<span class="c">%% Visualazing the activity map and its maximum</span>
+<span class="p">[</span><span class="n">Q_max</span><span class="p">,</span><span class="n">i_max</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">Q_est</span><span class="p">);</span>
+<span class="n">r0</span> <span class="p">=</span> <span class="n">coord</span><span class="p">(:,</span><span class="n">i_max</span><span class="p">);</span>
+<span class="n">SingleSliceVisualization_ActivityMap</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span><span class="n">Q_est</span><span class="p">,</span><span class="n">r0</span><span class="p">,</span><span class="s">&#39;CoordSystem&#39;</span><span class="p">,</span><span class="s">&#39;Brainstorm&#39;</span><span class="p">,</span><span class="s">&#39;ColorScale&#39;</span><span class="p">,</span><span class="s">&#39;double&#39;</span><span class="p">,</span><span class="s">&#39;Locator&#39;</span><span class="p">,</span><span class="s">&#39;pinhead&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="id2">
-<img alt="_images/activity_92ms.jpg" src="_images/activity_92ms.jpg" />
+<img alt="img/activity_92ms.jpg" src="img/activity_92ms.jpg" />
 <p class="caption"><span class="caption-text">Reconstructed activity map from real data at 92 ms</span></p>
 </div>
-<p><strong>Download</strong> IAS Demo script: <a class="reference download internal" download="" href="_downloads/b9079bad047207f427f7f6f494544d96/IAS_Demo.m"><code class="xref download docutils literal notranslate"><span class="pre">IAS_Demo.m</span></code></a></p>
+<p><strong>Download</strong> IAS Demo script: <code class="xref download docutils literal notranslate"><span class="pre">IAS_Demo.m</span></code></p>
 </div>
 
 
@@ -242,7 +247,7 @@ after discretization comprises 19054 vertices.</p>
         <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="IAS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="IAS algorithm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

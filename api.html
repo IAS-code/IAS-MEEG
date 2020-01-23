@@ -245,9 +245,56 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 </dd></dl>
 
 <dl class="function">
-<dt id="IAS.SlicedVisualization_ActivityMap_Gif">
-<code class="descclassname">IAS.</code><code class="descname">SlicedVisualization_ActivityMap_Gif</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SlicedVisualization_ActivityMap_Gif" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS.SlicedVisualization_ActivityMap">
+<code class="descclassname">IAS.</code><code class="descname">SlicedVisualization_ActivityMap</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SlicedVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a development program for visualizing the activity map</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><p class="first">coord: (3,N) array, coordinates of the dipoles in the grid</p>
+<p class="last">Q: (3*N, 1) vector, reconstructed dipole moments at a specified time point</p>
+</dd>
+<dt>Usage:</dt>
+<dd>SlicedVisualization_ActivityMap_Gif(coord, Q_est);</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="IAS.SingleSliceVisualization_ActivityMap">
+<code class="descclassname">IAS.</code><code class="descname">SingleSliceVisualization_ActivityMap</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SingleSliceVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualization of the activity over slices around a fixed location
+The visualization shows three views: Axial, coronal, and sagittal views
+across the brain. An schematic insert helping to visualize the the cut 
+lines are included.</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><p class="first">coord: (3,Ncoord) array, source space indicating the dipole locations</p>
+<p>Q: (1,ncoord) vector of non-negative entries, the dipole amplitudes</p>
+<p class="last">r0: (3,1) array, Cartesian coordinates of the cut planes</p>
+</dd>
+<dt>Optional input: </dt>
+<dd><blockquote class="first">
+<div><p><strong>Property</strong>: ‘Locator’. 
+<strong>Values</strong>: ‘haircross’(default),’circle’,’pinhead’,’none’</p>
+<blockquote>
+<div>This property defines how the point r0 is marked in the plots</div></blockquote>
+<p><strong>Property</strong>: ‘Thickness’
+<strong>Values</strong>: Real between 0 and 1. Default value 0.1</p>
+<blockquote>
+<div>Specifies the thichness of the slice represented in the plot</div></blockquote>
+<p><strong>Property</strong>: ‘CoordSystem’
+<strong>Values</strong>: ‘MNI’ (default) or ‘Brainstorm’
+<em>MNI</em>:        x (right), y (front), z (crown)
+<em>Brainstorm</em>: x (front), y (left), z (crown)</p>
+</div></blockquote>
+<dl class="last docutils">
+<dt>Output:</dt>
+<dd>curr_fig: the figure handle</dd>
+<dt>Usage:</dt>
+<dd>SingleSliceVisualization(coord,Q,r0) 
+SingleSliceVisualization(coord,Q,Y,r0,Property1,value1,Property2,value2,..)</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -82,7 +82,13 @@ after discretization comprises 19054 vertices.
     q = Q(:, t_vis);
     dip_norm2 = sum(reshape(q,3,N).^2,1);
     Q_est = sqrt(dip_norm2);
-    SlicedVisualization_ActivityMap_Gif(coord,Q_est);
+    SlicedVisualization_ActivityMap(coord,Q_est);
+    
+    %% Visualazing the activity map and its maximum
+    [Q_max,i_max] = max(Q_est);
+    r0 = coord(:,i_max);
+    SingleSliceVisualization_ActivityMap(coord,Q_est,r0,'CoordSystem','Brainstorm','ColorScale','double','Locator','pinhead');
+
 
 
 .. figure::  img/activity_92ms.jpg
