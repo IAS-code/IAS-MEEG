@@ -17,10 +17,14 @@ import sys
 sys.path.insert(0, '/home/pasca/Dropbox/MEGSIM_public_code/public_matlab_code/IAS')
 import sphinx_rtd_theme
 
+from datetime import date
+
 # -- Project information -----------------------------------------------------
 
 project = 'IAS'
-copyright = '2019, Author'
+td = date.today()
+copyright = u'%s, IAS Developers. Last updated on %s' % (td.year,
+                                                                td.isoformat())
 author = 'Author'
 
 # The short X.Y version
