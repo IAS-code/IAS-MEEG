@@ -19,7 +19,7 @@ Download
 
 .. code-block:: bash
 
-    git clone https://github.com/IAS-code/IAS.git    
+    git clone https://github.com/IAS-code/IAS-MEG.git 
     
 
 .. [Ref1] D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi

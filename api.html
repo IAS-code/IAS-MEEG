@@ -148,8 +148,8 @@
 <span id="id1"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Functions:</p>
 <dl class="function">
-<dt id="IAS.IAS_algorithm">
-<code class="descclassname">IAS.</code><code class="descname">IAS_algorithm</code><span class="sig-paren">(</span><em>LF</em>, <em>LF_scaling</em>, <em>APChol</em>, <em>B</em>, <em>B_scaling</em>, <em>sigma</em>, <em>theta_star</em>, <em>eta</em>, <em>n_outer</em>, <em>maxit</em>, <em>theta_tol</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.IAS_algorithm" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS-MEG.IAS_algorithm">
+<code class="descclassname">IAS-MEG.</code><code class="descname">IAS_algorithm</code><span class="sig-paren">(</span><em>LF</em>, <em>LF_scaling</em>, <em>APChol</em>, <em>B</em>, <em>B_scaling</em>, <em>sigma</em>, <em>theta_star</em>, <em>eta</em>, <em>n_outer</em>, <em>maxit</em>, <em>theta_tol</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.IAS_algorithm" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>This function solves the MEG inverse problem by the Iterative Alternating Sequential (IAS) algorithm. 
 The IAS algorithm is based on an iterative scheme that alternatively updates the dipole
@@ -193,8 +193,8 @@ Brain topography, 1-31, (2018)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="IAS.BuildAnatomicalPrior">
-<code class="descclassname">IAS.</code><code class="descname">BuildAnatomicalPrior</code><span class="sig-paren">(</span><em>coord</em>, <em>normals</em>, <em>tiny</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.BuildAnatomicalPrior" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS-MEG.BuildAnatomicalPrior">
+<code class="descclassname">IAS-MEG.</code><code class="descname">BuildAnatomicalPrior</code><span class="sig-paren">(</span><em>coord</em>, <em>normals</em>, <em>tiny</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.BuildAnatomicalPrior" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function generates the anatomical prior that favors dipoles in the preferred direction.</p>
 <blockquote>
 <div><dl class="docutils">
@@ -215,8 +215,8 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 </dd></dl>
 
 <dl class="function">
-<dt id="IAS.SetParameters">
-<code class="descclassname">IAS.</code><code class="descname">SetParameters</code><span class="sig-paren">(</span><em>LF</em>, <em>B</em>, <em>SNR</em>, <em>cut_off</em>, <em>is_paint</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SetParameters" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS-MEG.SetParameters">
+<code class="descclassname">IAS-MEG.</code><code class="descname">SetParameters</code><span class="sig-paren">(</span><em>LF</em>, <em>B</em>, <em>SNR</em>, <em>cut_off</em>, <em>is_paint</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SetParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function scales the lead field and the data, adjusts the truncation of the sensitivities, and returns an estimate for the standard deviation of the noise</p>
 <dl class="docutils">
 <dt>Input:</dt>
@@ -245,8 +245,8 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 </dd></dl>
 
 <dl class="function">
-<dt id="IAS.SlicedVisualization_ActivityMap">
-<code class="descclassname">IAS.</code><code class="descname">SlicedVisualization_ActivityMap</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SlicedVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS-MEG.SlicedVisualization_ActivityMap">
+<code class="descclassname">IAS-MEG.</code><code class="descname">SlicedVisualization_ActivityMap</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SlicedVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a development program for visualizing the activity map</p>
 <dl class="docutils">
 <dt>Input:</dt>
@@ -259,8 +259,8 @@ BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,
 </dd></dl>
 
 <dl class="function">
-<dt id="IAS.SingleSliceVisualization_ActivityMap">
-<code class="descclassname">IAS.</code><code class="descname">SingleSliceVisualization_ActivityMap</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS.SingleSliceVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
+<dt id="IAS-MEG.SingleSliceVisualization_ActivityMap">
+<code class="descclassname">IAS-MEG.</code><code class="descname">SingleSliceVisualization_ActivityMap</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SingleSliceVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualization of the activity over slices around a fixed location
 The visualization shows three views: Axial, coronal, and sagittal views
 across the brain. An schematic insert helping to visualize the the cut 
@@ -317,7 +317,7 @@ SingleSliceVisualization(coord,Q,Y,r0,Property1,value1,Property2,value2,..)</dd>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Author.
+        &copy; Copyright 2020, IAS Developers. Last updated on 2020-01-23.
 
     </p>
   </div>
