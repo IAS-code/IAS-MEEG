@@ -2,7 +2,7 @@ function curr_fig = SingleSliceVisualization_ActivityMap(varargin)
 
 % Visualization of the activity over slices around a fixed location
 % The visualization shows three views: Axial, coronal, and sagittal views
-% across the brain. An schematic insert helping to visualize the the cut 
+% across the brain. A schematic insert helping to visualize the cut 
 % lines are included.
 %
 % Input:
@@ -124,7 +124,7 @@ set(gcf,'color',background);
 Nnodes = size(Y,2); % Number of nodes in the surface mesh of the insert model
 Nelem  = size(T,1);  % Number of elements in the surface mesh
 Ncoord = size(coord,2); %Size of the source space
-margin = 0.1; % Margin in the plots to avoid that fgures get too crowded
+margin = 0.1; % Margin in the plots to avoid that figures get too crowded
 
 xmin = min(Y(1,:));
 xmax = max(Y(1,:));

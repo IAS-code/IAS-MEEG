@@ -15,9 +15,7 @@ function [APChol, has_normal_vec] = BuildAnatomicalPrior(coord, normals, tiny)
 %       APChol = BuildAnatomicalPrior(coord,normals,tiny)
 %       BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,normals,0.05)
 % 
-%---------------------------------------------------------------
-% Note: This program should be vectorized for speed-up
-%---------------------------------------------------------------
+
 
 % Setting default values
 if nargin == 2, tiny = 0.05; end
@@ -31,7 +29,6 @@ U2 = NaN(3, N);
 U3 = NaN(3, N);
 has_normal_vec = NaN(N, 1);
 E = eye(3);
-disp('Building anatomical prior: be patient, may take some minutes ...');
 for ell = 1:N
     u3 = normals(:,ell);
     if sum(u3) == 0
@@ -61,5 +58,4 @@ for j = 1:N
   end
 end
 
-disp('... done!');
 APChol = chol(C);

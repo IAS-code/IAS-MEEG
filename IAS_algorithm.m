@@ -1,4 +1,4 @@
-function [Q] = IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)
+function [Q,diagnostics] = IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)
 %
 % This function solves the MEG inverse problem by the Iterative Alternating Sequential (IAS) algorithm. 
 % The IAS algorithm is based on an iterative scheme that alternatively updates the dipole
@@ -32,9 +32,12 @@ function [Q] = IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,e
 % Output:
 %      Q: (3*N,T) array, reconstructed dipole moments
 % 
+%      diagnostics: [n_outer+1,T] matrix containing the number of inner iterations of
+%      each outer iteration step. Zeros in the matrix indicate that
+%      convergence was reached. The last row returns the relative changes in theta at the last outer iteration. 
 % 
 % Usage:
-%     Q=IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)
+%     [Q,diagnostics] = IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)
 % 
 %     IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,0.01,30,120,0.001)
 % 
@@ -61,6 +64,7 @@ function [Q] = IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,e
 % Setting default values
 if nargin == 7, eta = 0.01; n_outer = 30; maxit = 120; theta_tol = 0.001; end
 if nargin == 8,             n_outer = 30; maxit = 120; theta_tol = 0.001; end
+if nargin == 9,                           maxit = 120; theta_tol = 0.001; end
 if nargin == 10,                                       theta_tol = 0.001; end
 
 % Reading the number of channels M and the number of dipoles N
@@ -82,6 +86,8 @@ A = A*APChol';
 % Setting the time interval of the protocol
 nT = size(B,2);
 
+diagnostics = zeros(n_outer+1,nT);
+
 % Inizializing theta and Q
 theta = theta_star;
 Q = NaN(3*N,nT);
@@ -89,7 +95,7 @@ Q = NaN(3*N,nT);
 % Starting the time loop 
 disp('IAS algorithm: Running time loop ')
 for jj = 1:nT
-     disp(num2str(jj))
+     disp(['time = ', num2str(jj), ' (max. time = ',num2str(nT),')']);
 	 % Extracting data at time jj
 	 b = BB(:,jj);
 
@@ -128,8 +134,8 @@ for jj = 1:nT
 			 beta = aux1/aux0;
 			 p = r + beta*p;        % new search direction
 			 aux0 = aux1;
-		 end
-
+         end
+         
 		% Step 2: Update the hyperparameter theta
 		q = APChol'*spdiags(kron(sqrt(theta),ones(1,3))',0,3*N,3*N)*w;
 		dip_norm2 = sum(reshape(q,3,N).^2,1);
@@ -140,7 +146,9 @@ for jj = 1:nT
 		if theta_diff<theta_tol 
 		   % The relative change of theta is below the threshold; stop the outer iteration
 		   outer_iteration = 'no';
-		end
+        end
+        diagnostics(outer_count,jj) = j;
+        diagnostics(n_outer+1,jj) = theta_diff;
 	 end
 	 % Convergence is reached; saving dipole moments at time jj
 	 Q(:,jj) = q;

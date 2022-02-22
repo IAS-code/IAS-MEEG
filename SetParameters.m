@@ -1,8 +1,10 @@
-function [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,B,SNR,cut_off,is_paint)
+function [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,APChol,B,SNR,cut_off,is_paint)
 % This function scales the lead field and the data, adjusts the truncation of the sensitivities, and returns an estimate for the standard deviation of the noise
 %
 %  Input:
 %       LF: (m,3*n) array, the lead field matrix where m is the number of channels and n is the number of dipoles
+%
+%       APChol: Cholesky factor of the anatomical prior covariance       
 %
 %       B: (m,T) array, a clip of the data of length T
 %
@@ -30,54 +32,58 @@ function [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(L
 %        SetParameters(LF,B,SNR,cut_off) is equivalent to SetParameters(LF,B,SNR,cut_off,0)
 
 % Setting default values
-if nargin == 3, cut_off = 0.9; is_paint = 0; end
-if nargin == 4,                is_paint = 0; end
+if nargin == 4, cut_off = 1; is_paint = 0; end
+if nargin == 5,                is_paint = 0; end
 
 % Reading the number of channels m and the number of dipoles n
 [m,n3] = size(LF);
 n = n3/3; 
+%% 1. Lead field scaling
 
-% Computing the sensitivity matrix S: the jth row contains the powers of the
-% magnetic field at jth magnetometer corresponding to unit dipole
-% components at the field points
-AddCols = kron(speye(n),[1;1;1]);
-S = (LF.^2)*AddCols;
-
-% Finding the power of the magnetic field at the most sensitive magnetometer 
-% for each dipole
-MaxS = max(S);
-
+% Computing the sensitivity matrix S without anatomical prior: the jth row 
+% contains the powers of unit dipoles at each field point, as registered by
+% the jth magnetometer/electrode.
+AddCols    = kron(speye(n),[1;1;1]);
+S          = (LF.^2)*AddCols;
+% Finding the power of the magnetic field/voltage at the most sensitive 
+% magnetometer/electrode for each dipole
+MaxS       = max(S);
 % Scaling the lead field so that the mean maximum sensitivity is a unit
-MeanSens = 1/n*sum(MaxS);
-MaxS = 1/MeanSens*MaxS;
+MeanSens   = 1/n*sum(MaxS);
+% The lead field matrix is scaled by the square root (amplitude) of this number 
 LF_scaling = 1/sqrt(MeanSens);
-LF = LF_scaling*LF;
+LF         = LF_scaling*LF;
+
+%% 2. Scaling of the data
 
 % Checking the size of the data
-[m,T] = size(B);
-
-% Finding the maximum value and the norm of the magnetic field
+[m,T]     = size(B);
+% Finding the average amplitude over the sensors for each time slice
 Bnorm_ave = 1/m*sqrt(sum(B.^2,1))';
-
-% Scaling the magnetic field so that the mean norm is unity
-MeanB = 1/T*sum(Bnorm_ave);
+% Averaging over the time slices
+MeanB     = 1/T*sum(Bnorm_ave);
+% Scaling the data with the mean amplitude
 B_scaling = 1/MeanB;
-B = B_scaling*B;
+B         = B_scaling*B;
 
-% Computing theta_star using the scaled fields
-Phi = 1/T*norm(B.^2,'fro');
-S_scaled = (LF.^2)*AddCols;
-Sens = sum(S_scaled,1);
-theta_star = (2/5)*Phi./Sens; % beta = 5/2
+%% 3. Computing theta_star using the scaled fields
 
-% Cutting the highest theta_star values
-Q = theta_star - min(theta_star);
-Qsort = sort(Q,'ascend');
-i_cut = round(cut_off*n);
+Phi        = 1/T*norm(B,'fro')^2;         % Mean power over time slices
+S_scaled   = ((LF*APChol').^2)*AddCols;   % Scaled sensitivities
+Sens       = sum(S_scaled,1);
+% Safeguard: If SNR is given too low, theta_star ill-defined 
+SNR_eff    = max(SNR,1.1);
+theta_star = (2/5)*Phi*(1 - 1/SNR_eff)./Sens; % beta = 5/2
+
+%% 4. Cutting possibly the highest theta_star values
+
+Q             = theta_star - min(theta_star);
+Qsort         = sort(Q,'ascend');
+i_cut         = round(cut_off*n);
 theta_cut_off = Qsort(i_cut) + min(theta_star);
-theta_star = min(theta_star,theta_cut_off);
+theta_star    = min(theta_star,theta_cut_off);
 
-% Plotting the values of theta_star
+% Optional: Plotting the values of theta_star
 if is_paint
   figure
   semilogy((1:n),theta_star,'k.','MarkerSize',15)
@@ -91,9 +97,10 @@ if is_paint
   hold off
 end
 
-% Adjusting the noise level
+%% 5.  Adjusting the noise level of the scaled model
+
  B_ave_power = 1/T*sum(sum(B.^2)); 
- sigma2 = B_ave_power/(m*SNR);
- sigma = sqrt(sigma2);
+ sigma2      = B_ave_power/(m*SNR);
+ sigma       = sqrt(sigma2);
  
  
