@@ -6,7 +6,7 @@ function varargout = process_IAS( varargin )
 % moments Q by solving a linear least squares problem using a priorconditioned CGLS algorithm with sutable 
 % stopping condition and updating the hyperparameter theta by an explicit formula.
 % 
-% REFERENCES: https://ias-code.github.io/IAS-MEG/index.html
+% REFERENCES: https://ias-code.github.io/IAS-MEEG/index.html
 % 
 % @=============================================================================
 % This software is part of the Brainstorm software:
@@ -39,7 +39,7 @@ function sProcess = GetDescription() %#ok<DEFNU>
     sProcess.Category    = 'File';
     sProcess.SubGroup    = 'Sources';
     sProcess.Index       = 1000;
-    sProcess.Description = 'https://ias-code.github.io/IAS-MEG/index.html';
+    sProcess.Description = 'https://ias-code.github.io/IAS-MEEG/index.html';
     % Definition of the input accepted by this process
     sProcess.InputTypes  = {'data'};
     sProcess.OutputTypes = {'results'};

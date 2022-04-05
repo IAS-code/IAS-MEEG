@@ -134,7 +134,7 @@ for jj = 1:nT
 			 beta = aux1/aux0;
 			 p = r + beta*p;        % new search direction
 			 aux0 = aux1;
-         end
+                end
          
 		% Step 2: Update the hyperparameter theta
 		q = APChol'*spdiags(kron(sqrt(theta),ones(1,3))',0,3*N,3*N)*w;
@@ -146,7 +146,7 @@ for jj = 1:nT
 		if theta_diff<theta_tol 
 		   % The relative change of theta is below the threshold; stop the outer iteration
 		   outer_iteration = 'no';
-        end
+                end
         diagnostics(outer_count,jj) = j;
         diagnostics(n_outer+1,jj) = theta_diff;
 	 end

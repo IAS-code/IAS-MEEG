@@ -61,8 +61,8 @@ APChol = BuildAnatomicalPrior(coord,normals);
 %% Setting theta_star and scaling 
 disp('Setting parameters')
 t_peak = 86;   
-t_min = 70;
-t_max = 160;
+t_min = 1;
+t_max = 211;
 B = data(:,t_min:t_max);   % a clip of the data 
 [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,APChol,B,SNR,cut_off);
 
@@ -77,7 +77,7 @@ t_vis = t_peak - t_min +1;
 q = Q(:, t_vis);
 dip_norm2 = sum(reshape(q,3,N).^2,1);
 Q_est = sqrt(dip_norm2);
-SlicedVisualization_ActivityMap(coord,Q_est);
+% SlicedVisualization_ActivityMap(coord,Q_est);
 
 
 %% Visualazing the activity map and its maximum
