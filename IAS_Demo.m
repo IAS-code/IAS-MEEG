@@ -63,7 +63,7 @@ disp('Setting parameters')
 t_peak = 86;   
 t_min = 1;
 t_max = 211;
-B = data(:,t_min:t_max);   % a clip of the data 
+B = data(:,t_min:t_max);
 [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,APChol,B,SNR,cut_off);
 
 %% Solving the inverse problem using IAS algorithm
