@@ -2,7 +2,7 @@ function curr_fig = SingleSliceVisualization_ActivityMap(varargin)
 
 % Visualization of the activity over slices around a fixed location
 % The visualization shows three views: Axial, coronal, and sagittal views
-% across the brain. An schematic insert helping to visualize the the cut 
+% across the brain. A schematic insert helping to visualize the cut 
 % lines are included.
 %
 % Input:
@@ -124,7 +124,7 @@ set(gcf,'color',background);
 Nnodes = size(Y,2); % Number of nodes in the surface mesh of the insert model
 Nelem  = size(T,1);  % Number of elements in the surface mesh
 Ncoord = size(coord,2); %Size of the source space
-margin = 0.1; % Margin in the plots to avoid that fgures get too crowded
+margin = 0.1; % Margin in the plots to avoid that figures get too crowded
 
 xmin = min(Y(1,:));
 xmax = max(Y(1,:));
@@ -260,10 +260,15 @@ Colors{8,1} = find(logQ>=logQlev(8));
 Colors{1,2} = 1/255*[50,50,50]; 
 Colors{2,2} = 1/255*[50,50,50]; 
 Colors{3,2} = 1/255*[50,50,50]; 
+rgb_grey = [128, 128, 128];
+Colors{1,2} = 1/255*rgb_grey; 
+Colors{2,2} = 1/255*rgb_grey; 
+Colors{3,2} = 1/255*rgb_grey; 
+Colors{4,2} = 1/255*rgb_grey; 
 % Colors{4,2} = 1/255*[50,50,50]; 
 % Colors{5,2} = 1/255*[50,50,50]; 
 % Colors{6,2} = 1/255*[50,50,50]; 
-Colors{4,2} = 1/255*[0,75,125]; 
+% Colors{4,2} = 1/255*[0,75,125]; 
 Colors{5,2} = 1/255*[0,125,125]; 
 Colors{6,2} = 1/255*[255,255,0]; 
 Colors{7,2} = 1/255*[255,165,0];

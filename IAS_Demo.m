@@ -30,14 +30,14 @@
 
 %% Reset all
 clear; clc; 
-close all
+% close all
 
 %% Input
 %     SNR: estimated signal-to-noise ratio
-SNR = 25;
+SNR = 9;
 %     eta: scalar, parameter for selecting the focality of the reconstructed activity
 eta = 0.01;
-
+cut_off = 0.9;
 %% Loading the source space
 %     coord, normals: (3,N) array, coordinates and normal vectors of the dipoles in the grid
 disp('Loading source space')
@@ -61,10 +61,10 @@ APChol = BuildAnatomicalPrior(coord,normals);
 %% Setting theta_star and scaling 
 disp('Setting parameters')
 t_peak = 86;   
-t_min = 70;
-t_max = 160;
-B = data(:,t_min:t_max);   % a clip of the data 
-[theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,B,SNR);
+t_min = 1;
+t_max = 211;
+B = data(:,t_min:t_max);
+[theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,APChol,B,SNR,cut_off);
 
 %% Solving the inverse problem using IAS algorithm
 disp(['Running IAS algorithm from time ',num2str(time(t_min)),' ms to time ',num2str(time(t_max)),' ms'])
@@ -77,7 +77,7 @@ t_vis = t_peak - t_min +1;
 q = Q(:, t_vis);
 dip_norm2 = sum(reshape(q,3,N).^2,1);
 Q_est = sqrt(dip_norm2);
-SlicedVisualization_ActivityMap(coord,Q_est);
+% SlicedVisualization_ActivityMap(coord,Q_est);
 
 
 %% Visualazing the activity map and its maximum

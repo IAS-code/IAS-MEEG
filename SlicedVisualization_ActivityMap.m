@@ -38,13 +38,16 @@ Colors{6,1} = find(logQ>=logQlev(6) & logQ <logQlev(7));
 Colors{7,1} = find(logQ>=logQlev(7) & logQ <logQlev(8));
 Colors{8,1} = find(logQ>=logQlev(8));
 % Double color scale
-Colors{1,2} = 1/255*[50,50,50]; 
-Colors{2,2} = 1/255*[50,50,50]; 
-Colors{3,2} = 1/255*[50,50,50]; 
-% Colors{4,2} = 1/255*[50,50,50]; 
+% [50, 50, 50] -> grigio scuro
+% [160, 160, 160] -> grigio chiaro
+rgb_grey = [128, 128, 128];
+Colors{1,2} = 1/255*rgb_grey; 
+Colors{2,2} = 1/255*rgb_grey; 
+Colors{3,2} = 1/255*rgb_grey; 
+Colors{4,2} = 1/255*rgb_grey; 
 % Colors{5,2} = 1/255*[50,50,50]; 
 % Colors{6,2} = 1/255*[50,50,50]; 
-Colors{4,2} = 1/255*[0,75,125]; 
+% Colors{4,2} = 1/255*[0,75,125]; 
 Colors{5,2} = 1/255*[0,125,125]; 
 Colors{6,2} = 1/255*[255,255,0]; 
 Colors{7,2} = 1/255*[255,165,0];
