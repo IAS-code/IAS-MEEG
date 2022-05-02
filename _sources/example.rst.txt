@@ -26,7 +26,7 @@ after discretization comprises 19054 vertices.
 
 .. |here| raw:: html
 
-   <a href="https://www.dropbox.com/s/fe00ojza0osq3s9/IAS_data.tar.gz?dl=1" target="_blank">here</a>
+   <a href="https://www.dropbox.com/s/6ho0w35y591lm24/IAS_data.tar.gz?dl=1" target="_blank">here</a>
    
 .. [Ref] A. Gramfort et al, MNE software for processing MEG and EEG data, Neuroimage 86 (2014) 446-460
 
@@ -38,9 +38,10 @@ after discretization comprises 19054 vertices.
 
     %% Input
     %     SNR: estimated signal-to-noise ratio
-    SNR = 25;
+    SNR = 9;
     %     eta: scalar, parameter for selecting the focality of the reconstructed activity
     eta = 0.01;
+    cut_off = 0.9;
 
     %% Loading the source space
     %     coord, normals: (3,N) array, coordinates and normal vectors of the dipoles in the grid
@@ -66,14 +67,14 @@ after discretization comprises 19054 vertices.
     %% Setting theta_star and scaling 
     disp('Setting parameters')
     t_peak = 86;   
-    t_min = 70;
-    t_max = 160;
-    B = data(:,t_min:t_max);   % a clip of the data 
-    [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,B,SNR);
+    t_min = 1;
+    t_max = 211;
+    B = data(:,t_min:t_max);
+    [theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,APChol,B,SNR,cut_off);
 
     %% Solving the inverse problem using IAS algorithm
     disp(['Running IAS algorithm from time ',num2str(time(t_min)),' ms to time ',num2str(time(t_max)),' ms'])
-    Q = IAS_algorithm(LF, LF_scaling, APChol, data, B_scaling, sigma, theta_star, eta);
+    Q = IAS_algorithm(LF, LF_scaling, APChol, B, B_scaling, sigma, theta_star, eta);
 
     %% Visualizing the activity map
     disp(['Visualizing activity map at time ',num2str(time(t_peak)),' ms'])

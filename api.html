@@ -1,64 +1,33 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API Documentation &mdash; IAS  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="IAS Demo" href="example.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
+        <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> IAS
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -66,297 +35,65 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="example.html">IAS Demo</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">IAS</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>API Documentation</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="api-documentation">
+             
+  <section id="api-documentation">
 <span id="id1"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Functions:</p>
-<dl class="function">
-<dt id="IAS-MEG.IAS_algorithm">
-<code class="descclassname">IAS-MEG.</code><code class="descname">IAS_algorithm</code><span class="sig-paren">(</span><em>LF</em>, <em>LF_scaling</em>, <em>APChol</em>, <em>B</em>, <em>B_scaling</em>, <em>sigma</em>, <em>theta_star</em>, <em>eta</em>, <em>n_outer</em>, <em>maxit</em>, <em>theta_tol</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.IAS_algorithm" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>This function solves the MEG inverse problem by the Iterative Alternating Sequential (IAS) algorithm. 
-The IAS algorithm is based on an iterative scheme that alternatively updates the dipole
-moments Q by solving a linear least squares problem using a priorconditioned CGLS algorithm with sutable 
-stopping condition and updating the hyperparameter theta by an explicit formula.</p>
-<dl class="docutils">
-<dt>Input:</dt>
-<dd><p class="first">LF: (M,3*N) array, the lead field matrix where M is the number of channels and N is the number of dipoles</p>
-<p>LF_scaling: scalar to be used to scale the lead field (output of the function SetParameters)</p>
-<p>APChol: (3*N,3*N) array, the Cholesky factor of the anatomical prior covariance matrix</p>
-<p>B: (M,T) array, a set of data of length T</p>
-<p>B_scaling: scalar, to be used for scaling the data (output of the function SetParameters)</p>
-<p>sigma: scalar, standard deviation of the scaled noise (output of the function SetParameters)</p>
-<p>theta_star: N-vector, computed theta_star values (output of the function SetParameters)</p>
-<p>eta: scalar, parameter for selecting the focality of the reconstructed activity (default value: 0.01; choose 0.001 for focal sources)</p>
-<p>n_outer: scalar, maximum number of iterations of the outer loop (default value: 30)</p>
-<p>maxit: scalar, maximum number of iterations of the inner loop (default value: 120)</p>
-<p class="last">theta_tol: scalar, limit of the relative change of theta in the outer loop (default value: 0.001)</p>
-</dd>
-<dt>Output:</dt>
-<dd>Q: (3*N,T) array, reconstructed dipole moments</dd>
-<dt>Usage:</dt>
-<dd><p class="first">Q=IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,theta_tol)</p>
-<p>IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,0.01,30,120,0.001)</p>
-<p>IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,30,120,0.001)</p>
-<p class="last">IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit) is equivalent to IAS_algorithm(LF,LF_scaling,APChol,B,B_scaling,sigma,theta_star,eta,n_outer,maxit,0.001)</p>
-</dd>
-</dl>
-</div></blockquote>
-<blockquote>
-<div><p>References:</p>
-<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-A hierarchical Krylov-Bayes iterative inverse solver for MEG with physiological preconditioning
-Inverse Problems, 31 (12) (2015) 12500</p>
-<p>D. Calvetti, A. Pascarella, F. Pitolli, E. Somersalo, B. Vantaggi
-Brain Activity Mapping from MEG Data via a Hierarchical Bayesian Algorithm with Automatic Depth Weighting,
-Brain topography, 1-31, (2018)</p>
-</div></blockquote>
-<blockquote>
-<div>Version: July, 2017</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="IAS-MEG.BuildAnatomicalPrior">
-<code class="descclassname">IAS-MEG.</code><code class="descname">BuildAnatomicalPrior</code><span class="sig-paren">(</span><em>coord</em>, <em>normals</em>, <em>tiny</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.BuildAnatomicalPrior" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function generates the anatomical prior that favors dipoles in the preferred direction.</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>Input:</dt>
-<dd><p class="first">coord: (3,N) array, coordinates of the dipoles in the grid</p>
-<p>normals: (3,N) array, normal vectors of the dipoles in the grid</p>
-<p class="last">tiny: scalar, relative variance of the components of the dipoles orthogonal to the preferred direction (default value: 0.05)</p>
-</dd>
-<dt>Output:</dt>
-<dd>APChol: (3*N,3*N) array, the Cholesky factor of the anatomical prior covariance</dd>
-<dt>Usage: </dt>
-<dd>APChol = BuildAnatomicalPrior(coord,normals,tiny)
-BuildAnatomicalPrior(coord,normals) is equivalent to BuildAnatomicalPrior(coord,normals,0.05)</dd>
-</dl>
-</div></blockquote>
-<blockquote>
-<div>Note: This program should be vectorized for speed-up</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="IAS-MEG.SetParameters">
-<code class="descclassname">IAS-MEG.</code><code class="descname">SetParameters</code><span class="sig-paren">(</span><em>LF</em>, <em>B</em>, <em>SNR</em>, <em>cut_off</em>, <em>is_paint</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SetParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function scales the lead field and the data, adjusts the truncation of the sensitivities, and returns an estimate for the standard deviation of the noise</p>
-<dl class="docutils">
-<dt>Input:</dt>
-<dd><p class="first">LF: (m,3*n) array, the lead field matrix where m is the number of channels and n is the number of dipoles</p>
-<p>B: (m,T) array, a clip of the data of length T</p>
-<p>SNR: estimated signal-to-noise ratio</p>
-<p>cut_off: scalar 0&lt;cut_off&lt;1, defines the cut off level, removing (1-cut_off)% of the highest theta_star values. Values of the order 0.8…0.9 are expected for cut_off (default value: 0.9)</p>
-<p class="last">is_paint: scalar; setting is_paint=1 plots theta_star (default value: 0)</p>
-</dd>
-<dt>Output:    </dt>
-<dd><p class="first">theta_star: n-vector, computed theta_star values with truncation</p>
-<p>theta_cut_off: scalar, the cut-off value of the theta_star</p>
-<p>sigma: scalar, standard deviation of the scaled noise</p>
-<p>LF_scaling: scalar to be used to scale the lead field</p>
-<p class="last">B_scaling: scalar, to be used for scaling the data</p>
-</dd>
-<dt>Usage: </dt>
-<dd><dl class="first last docutils">
-<dt>[theta_star,theta_cut_off,sigma,LF_scaling,B_scaling] = SetParameters(LF,B,SNR,cut_off,is_paint)</dt>
-<dd><p class="first">SetParameters(LF,B,SNR) is equivalent to SetParameters(LF,B,SNR,0.9,0)</p>
-<p class="last">SetParameters(LF,B,SNR,cut_off) is equivalent to SetParameters(LF,B,SNR,cut_off,0)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="IAS-MEG.SlicedVisualization_ActivityMap">
-<code class="descclassname">IAS-MEG.</code><code class="descname">SlicedVisualization_ActivityMap</code><span class="sig-paren">(</span><em>coord</em>, <em>Q</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SlicedVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is a development program for visualizing the activity map</p>
-<dl class="docutils">
-<dt>Input:</dt>
-<dd><p class="first">coord: (3,N) array, coordinates of the dipoles in the grid</p>
-<p class="last">Q: (3*N, 1) vector, reconstructed dipole moments at a specified time point</p>
-</dd>
-<dt>Usage:</dt>
-<dd>SlicedVisualization_ActivityMap_Gif(coord, Q_est);</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="IAS-MEG.SingleSliceVisualization_ActivityMap">
-<code class="descclassname">IAS-MEG.</code><code class="descname">SingleSliceVisualization_ActivityMap</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#IAS-MEG.SingleSliceVisualization_ActivityMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Visualization of the activity over slices around a fixed location
-The visualization shows three views: Axial, coronal, and sagittal views
-across the brain. An schematic insert helping to visualize the the cut 
-lines are included.</p>
-<dl class="docutils">
-<dt>Input:</dt>
-<dd><p class="first">coord: (3,Ncoord) array, source space indicating the dipole locations</p>
-<p>Q: (1,ncoord) vector of non-negative entries, the dipole amplitudes</p>
-<p class="last">r0: (3,1) array, Cartesian coordinates of the cut planes</p>
-</dd>
-<dt>Optional input: </dt>
-<dd><blockquote class="first">
-<div><p><strong>Property</strong>: ‘Locator’. 
-<strong>Values</strong>: ‘haircross’(default),’circle’,’pinhead’,’none’</p>
-<blockquote>
-<div>This property defines how the point r0 is marked in the plots</div></blockquote>
-<p><strong>Property</strong>: ‘Thickness’
-<strong>Values</strong>: Real between 0 and 1. Default value 0.1</p>
-<blockquote>
-<div>Specifies the thichness of the slice represented in the plot</div></blockquote>
-<p><strong>Property</strong>: ‘CoordSystem’
-<strong>Values</strong>: ‘MNI’ (default) or ‘Brainstorm’
-<em>MNI</em>:        x (right), y (front), z (crown)
-<em>Brainstorm</em>: x (front), y (left), z (crown)</p>
-</div></blockquote>
-<dl class="last docutils">
-<dt>Output:</dt>
-<dd>curr_fig: the figure handle</dd>
-<dt>Usage:</dt>
-<dd>SingleSliceVisualization(coord,Q,r0) 
-SingleSliceVisualization(coord,Q,Y,r0,Property1,value1,Property2,value2,..)</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="example.html" class="btn btn-neutral" title="IAS Demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example.html" class="btn btn-neutral float-left" title="IAS Demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, IAS Developers. Last updated on 2020-01-23.
-
-    </p>
+    <p>&#169; Copyright 2022, IAS Developers. Last updated on 2022-05-02.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            LANGUAGE:'en',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
