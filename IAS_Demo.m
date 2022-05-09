@@ -86,3 +86,37 @@ r0 = coord(:,i_max);
 SingleSliceVisualization_ActivityMap(coord,Q_est,r0,'CoordSystem','Brainstorm','ColorScale','double','Locator','pinhead');
 
 
+%% Compute time series of maximum
+% Time series of all dipoles of the source space
+nt = t_max - t_min + 1;
+
+Q_est_all = zeros(N, nt);
+for i=1:size(Q,2)
+  q = Q(:, i);
+  Q_est_all(:, i) = sqrt(sum(reshape(q,3,N).^2,1));
+end
+figure, plot(Q_est_all')
+
+
+%% Visualizing time series
+t_sel = [83, 110, 128, 143, 201] - t_min +1;  % visual selection of tp
+color = {[255 140   0]/255, 'r', [139   0   0]/255, 'c', [0   0 255]/255, [30 144 255]/255, [128   0 128]/255};
+
+figure
+subplot(1,2,1)
+plot3(coord(1, :), coord(2, :), coord(3, :),'color', [128 128 128]/255, 'Marker', '.', 'MarkerSize', 4, 'linestyle', 'none')
+hold on
+subplot(1, 2, 2), hold on
+for i=1:length(t_sel)
+  t = t_sel(i);
+  time(t_sel(i))
+  [val1, i_val1] = max(Q_est_all(:, t));
+  
+  subplot(1,2,1), plot3(coord(1, i_val1), coord(2, i_val1), coord(3, i_val1), 'color', color{i} , 'Marker', '.', 'MarkerSize', 45)
+  subplot(1, 2, 2), plot(time(t_min:t_max), Q_est_all(i_val1, :), 'color', color{i}, 'LineWidth', 2)
+  
+end
+
+print('time_series.png', '-dpng', '-r300')
+
+
